@@ -1,16 +1,24 @@
-# Use Python 3.6 as a base image
+
+
+# Use a more recent Python version
 FROM python:3.6
-# Copy contents into image
+
+# Set working directory
 WORKDIR /app
 
-COPY . .
-# Install pip dependencies from requirements
-RUN pip install -r requirements.txt
-# Set YOUR_NAME environment variable
-ENV YOUR_NAME="friend"
+# Copy requirements.txt first to leverage caching
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the correct port
+# Copy the rest of the application files
+COPY . .
+
+# Set environment variables
+ENV YOUR_NAME="friend"
+ENV TZ=UTC
+
+# Expose the Flask app port
 EXPOSE 5500
 
-# Create an entrypoint
-ENTRYPOINT [ "python", "app.py" ]
+# Use CMD instead of ENTRYPOINT for flexibility
+CMD ["python", "app.py"]
