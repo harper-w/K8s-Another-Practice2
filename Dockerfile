@@ -1,5 +1,5 @@
 # Use Python 3.6 as a base image
-From python:3.6
+FROM python:3.6
 # Copy contents into image
 WORKDIR /app
 
