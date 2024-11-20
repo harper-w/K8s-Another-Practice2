@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: flask-container
-        image: harper1105/duo-flask:latest
+        image: harper1105/duo-jenk:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5500
